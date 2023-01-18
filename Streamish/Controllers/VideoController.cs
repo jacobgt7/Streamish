@@ -21,6 +21,18 @@ namespace Streamish.Controllers
             return Ok(_videoRepository.GetAll());
         }
 
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var video = _videoRepository.GetById(id);
+            if (video == null)
+            {
+                return NotFound();
+            }
+            return Ok(video);
+        }
+        
         [HttpGet("GetWithComments")]
         public IActionResult GetWithComments()
         {
@@ -28,10 +40,10 @@ namespace Streamish.Controllers
             return Ok(videos);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet("GetWithComments/{id}")]
+        public IActionResult GetWithComments(int id)
         {
-            var video = _videoRepository.GetById(id);
+            var video = _videoRepository.GetByIdWithComments(id);
             if (video == null)
             {
                 return NotFound();
