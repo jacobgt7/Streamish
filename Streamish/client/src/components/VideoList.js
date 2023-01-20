@@ -32,7 +32,6 @@ const VideoList = () => {
 
     return (
         <>
-            <VideoForm setVideos={setVideos}></VideoForm>
             <div className="container">
                 <Form>
                     <FormGroup>
