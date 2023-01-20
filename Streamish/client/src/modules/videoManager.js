@@ -20,3 +20,8 @@ export const addVideo = (video) => {
         body: JSON.stringify(video),
     });
 };
+
+export const searchVideos = (searchTerms) => {
+    return fetch(`/api/video/search?q=${searchTerms}&sortDesc=true`)
+        .then(res => res.json())
+}

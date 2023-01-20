@@ -370,6 +370,7 @@ namespace Streamish.Repositories
                                     Email = DbUtils.GetString(reader, "Email"),
                                     DateCreated = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
                                     ImageUrl = DbUtils.GetString(reader, "UserProfileImageUrl"),
+                                    
                                 },
                             });
                         }
