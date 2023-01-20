@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Video from './Video';
 import { getAllVideos, getAllVideosWithComments, searchVideos } from "../modules/videoManager";
 import { FormGroup, Form, Input, Button } from "reactstrap";
+import VideoForm from "./VideoForm";
 
 const VideoList = () => {
     const [videos, setVideos] = useState([]);
@@ -30,19 +31,22 @@ const VideoList = () => {
     }
 
     return (
-        <div className="container">
-            <Form>
-                <FormGroup>
-                    <Input onChange={handleSearchInput} type="text" name="search" id="search" />
-                    <Button onClick={handleSearchButton}>Search</Button>
-                </FormGroup>
-            </Form>
-            <div className="row justify-content-center">
-                {videos.map((video) => (
-                    <Video video={video} key={video.id} />
-                ))}
+        <>
+            <VideoForm setVideos={setVideos}></VideoForm>
+            <div className="container">
+                <Form>
+                    <FormGroup>
+                        <Input onChange={handleSearchInput} type="text" name="search" id="search" />
+                        <Button onClick={handleSearchButton}>Search</Button>
+                    </FormGroup>
+                </Form>
+                <div className="row justify-content-center">
+                    {videos.map((video) => (
+                        <Video video={video} key={video.id} />
+                    ))}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
