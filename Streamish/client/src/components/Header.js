@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { logout } from "../modules/authManager";
 
 const Header = () => {
     return (
@@ -16,6 +17,11 @@ const Header = () => {
                 <li className="nav-item">
                     <Link to="/videos/add" className="nav-link">
                         New Video
+                    </Link>
+                </li>
+                <li className="nav-item">
+                    <Link onClick={logout}>
+                        Logout
                     </Link>
                 </li>
             </ul>
