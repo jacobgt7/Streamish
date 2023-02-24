@@ -208,6 +208,6 @@ namespace Streamish.Tests
                 DateCreated = DateTime.Today.AddDays(-id),
                 ImageUrl = $"http://user.url/{id}",
             };
-        }
+        }  
     }
 }
