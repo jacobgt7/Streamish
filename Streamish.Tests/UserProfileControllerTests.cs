@@ -108,6 +108,50 @@ namespace Streamish.Tests
             Assert.IsType<BadRequestResult>(result);
         }
 
+        [Fact]
+        public void Put_Method_Updates_A_Profile()
+        {
+            // Arrange
+            var profiles = CreateTestUserProfiles(5);
+            var repo = new InMemoryUserProfileRepository(profiles);
+            var controller = new UserProfileController(repo);
+            var testProfileId = 99;
+            profiles[0].Id = testProfileId;
+            var profileToUpdate = new UserProfile
+            {
+                Id = testProfileId,
+                Name = "Updated!",
+                Email = "Updated!",
+                ImageUrl = "Updated!"
+            };
+
+            // Act
+           controller.Put(testProfileId, profileToUpdate);
+
+            // Assert
+            var profileFromDb = repo.InternalData.FirstOrDefault(p => p.Id == testProfileId);
+            Assert.NotNull(profileFromDb);
+            Assert.Equal(profileFromDb.Name, profileToUpdate.Name);
+            Assert.Equal(profileFromDb.Email, profileToUpdate.Email);
+            Assert.Equal(profileFromDb.ImageUrl, profileToUpdate.ImageUrl);
+
+        }
+
+        [Fact]
+        public void Delete_Method_Deletes_A_Profile()
+        {
+            var profiles = CreateTestUserProfiles(5);
+            var repo = new InMemoryUserProfileRepository(profiles);
+            var controller = new UserProfileController(repo);
+            var testProfileId = 99;
+            profiles[0].Id = testProfileId;
+
+            controller.Delete(testProfileId);
+
+            var profileFromDb = repo.InternalData.FirstOrDefault(p => p.Id == testProfileId);
+            Assert.Null(profileFromDb);
+        }
+
         private List<UserProfile> CreateTestUserProfiles(int quantity)
         {
             List<UserProfile> profiles = new List<UserProfile>();
