@@ -68,7 +68,9 @@ namespace Streamish.Tests.Mocks
 
         public List<Video> Search(string criterion, bool sortDescending)
         {
-            throw new NotImplementedException();
+            var searchTerms = criterion.ToLower();
+            var searchResults = _data.Where(p => p.Title.ToLower().Contains(searchTerms) || p.Description.ToLower().Contains(searchTerms)).ToList();
+            return searchResults;
         }
 
         public List<Video> GetAllWithComments()
